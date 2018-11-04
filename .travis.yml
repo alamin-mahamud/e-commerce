@@ -1,0 +1,22 @@
+language: go
+
+go:
+  - 1.9.x
+  - 1.10.x
+  - 1.11.x
+  - master
+
+# services:
+#   - rabbitmq
+#   - redis
+#   - mongodb
+
+# env:
+#  - HELLO=World
+
+before_install:
+  - go get -v github.com/golang/lint/golint
+
+script:
+  - ./scripts/pre-commit.sh
+  - go test -cpu=1,2 -v -tags integration ./...
