@@ -19,4 +19,4 @@ before_install:
 
 script:
   - ./scripts/pre-commit.sh
-  - go test -cpu=1,2 -v -tags integration ./...
+  - go test
