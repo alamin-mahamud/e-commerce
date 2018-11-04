@@ -17,6 +17,6 @@ go:
 before_install:
   - go get -v github.com/golang/lint/golint
 
-script:
-  - ./scripts/pre-commit.sh
-  - go test
+# script:
+#   - ./scripts/pre-commit.sh
+#   - go test
