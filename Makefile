@@ -1,5 +1,5 @@
 BINARY=e-commerce
-TESTS=go test $$(go list ./... | grep -v /vendor/) -cover
+TESTS=go test $(go list ./... | grep -v /vendor/) -cover
 
 build:
 	${TESTS}
@@ -10,7 +10,7 @@ install:
 	go build -o ${BINARY}
 
 unittest:
-	go test -short $$(go list ./... | grep -v /vendor/)
+	go test -short $(go list ./... | grep -v /vendor/)
 
 
 clean:
