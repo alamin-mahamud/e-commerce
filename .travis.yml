@@ -11,12 +11,14 @@ go:
 #   - redis
 #   - mongodb
 
-# env:
-#  - HELLO=World
+env:
+  - HELLO=World
 
 before_install:
   - go get -v github.com/golang/lint/golint
-
+  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  - dep ensure
+  
 # script:
 #   - ./scripts/pre-commit.sh
 #   - go test
