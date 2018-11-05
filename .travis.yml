@@ -1,8 +1,6 @@
 language: go
 
 go:
-  - 1.9.x
-  - 1.10.x
   - 1.11.x
   - master
 
@@ -22,8 +20,6 @@ install: true
 
 script:
   - dep ensure
-  - go test
-  
-# script:
-#   - ./scripts/pre-commit.sh
-#   - go test
+  - ./scripts/gofmt.sh
+  - go build -v ./...
+  - go test -v ./...
