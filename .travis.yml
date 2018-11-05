@@ -17,7 +17,12 @@ env:
 before_install:
   - go get -v github.com/golang/lint/golint
   - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+
+install: true
+
+script:
   - dep ensure
+  - go test
   
 # script:
 #   - ./scripts/pre-commit.sh
