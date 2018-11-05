@@ -4,12 +4,6 @@ sudo: false
 
 language: go
 
-
-# services:
-#   - rabbitmq
-#   - redis
-#   - mongodb
-
 # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
 env:
   - GO111MODULE=on
@@ -35,8 +29,8 @@ notifications:
 # Anything in before_script that returns a nonzero exit code will flunk the
 # build and immediately stop. It's sorta like having set -e enabled in bash.
 # Make sure golangci-lint is vendored.
-# before_script:
-#   - go install -mod vendor github.com/golangci/golangci-lint/cmd/golangci-lint
+#before_script:
+#  - go install -mod vendor github.com/golangci/golangci-lint/cmd/golangci-lint
 
 
 # script always runs to completion (set +e). If we have linter issues AND a
@@ -45,5 +39,9 @@ notifications:
 script:
 #  - golangci-lint run       # run a bunch of code checkers/linters in parallel 
   - ./scripts/gofmt.sh
-  - go build -v ./... 
-  - go test -v -race ./...  # Run all the tests with the race detector enabled
+#  - go build -v $(go list ./... | grep -v /vendor/) 
+  - go test -race $(go list ./... | grep -v /vendor/) -cover  # Run all the tests with the race detector enabled
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  
