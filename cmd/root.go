@@ -5,6 +5,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/alamin-mahamud/e-commerce/api/app"
 )
 
 var rootCmd = &cobra.Command{
@@ -21,7 +23,7 @@ Directory Structure
 3. WEB
 `,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Hello World")
+		app.Start()
 	},
 }
 
