@@ -31,6 +31,7 @@ func registerNotificationRoutes(router *mux.Router) {
 	//	router.HandleFunc(AUTH_BASE+SEP+"signup", SignUp).Methods("POST")
 }
 
+// New Instance Router
 func New() *mux.Router {
 	router := mux.NewRouter()
 

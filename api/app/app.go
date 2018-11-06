@@ -3,9 +3,12 @@ package app
 import (
 	"log"
 	"net/http"
+	"os"
 )
 
 func Start() {
 	router := New()
-	log.Fatal(http.ListenAndServe(":8000", router))
+	//os.Setenv("PORT", "8000")
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
