@@ -19,7 +19,7 @@ git:
 script:
   - ./scripts/gofmt.sh
   - make build
-  - make test
+  - make unittest
 
 notifications:
   email: false
