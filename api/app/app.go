@@ -9,7 +9,7 @@ import (
 func Start() {
 	router := New()
 
-	port := 8010 // os.Getenv("PORT")
+	port := "8010" // os.Getenv("PORT")
 
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
