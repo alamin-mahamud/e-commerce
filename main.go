@@ -1,8 +1,7 @@
 package main
 
 import (
-	"e-commerce-go-api/cmd"
-
+	"github.com/alamin-mahamud/e-commerce-go-api/cmd"
 	"github.com/pkg/profile"
 )
 
