@@ -6,9 +6,11 @@ import (
 	"os"
 )
 
+// Start the App
 func Start() {
 	router := New()
-	//os.Setenv("PORT", "8000")
+
 	port := os.Getenv("PORT")
+
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }

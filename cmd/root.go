@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/alamin-mahamud/e-commerce-go-api/api/app"
 	"github.com/spf13/cobra"
-
-	"github.com/alamin-mahamud/e-commerce/api/app"
 )
 
 var rootCmd = &cobra.Command{
