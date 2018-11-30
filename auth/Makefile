@@ -1,12 +1,6 @@
 BINARY=e-commerce
 TESTS=go test $(go list ./... | grep -v /vendor/) -cover
 
-up:
-	docker-compose up
-
-down:
-	docker-compose down
-
 build:
 	${TESTS}
 	go build -o ${BINARY} $(go list ./... | grep -v /vendor/) 
@@ -22,4 +16,5 @@ unittest:
 clean:
 	if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
 
-.PHONY: clean install unittest build up down
+.PHONY: clean install unittest
+
