@@ -1,7 +1,111 @@
 version: '3'
 
 services:
-  auth:
-    build: "./auth"
+  
+  # Central Configuration
+  config-server:
+    build: config-server/.
     ports:
-      - "3000:3000"
+      - "8888:8888"
+    networks:
+      - configuration-network
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/...
+    networks:
+      - mongodb-network
+
+  # Neo4j
+  neo4j:
+    image: neo4j:latest
+    ports:
+      - "7474:7474"
+    volumes:
+      - neo4j-data:/...
+    networks:
+      - neo4j-network
+  
+  # Service Discovery
+  service-registry:
+    build: ./service-registry
+    networks:
+      - configuration-network
+    ports:
+      - "8761:8761"
+
+  # Auth Server
+  auth:
+    build: ./auth
+    networks:
+      - configuration-network
+      - auth-network
+    ports:
+      - "9999:9999"
+    
+  hystrix:
+    build: ./hystrix-dashboard
+    ports:
+      - "7979:7979"
+  
+  catalog:
+    build: ./microservices-catalog
+    networks:
+      - configuration-network
+      - auth-network
+      - service-registry-network
+    ports:
+      - "8080:8080"
+    
+  reviews:
+    build: ./reviews
+    networks:
+      - configuration-network
+      - auth-network
+      - service-registry-network
+      - mongodb-network
+    ports:
+      - "8081:8081"
+    
+  recommendations:
+    build: ./recommendations
+    networks:
+      - configuration-network
+      - auth-network
+      - service-registry-network
+      - neo4j-network
+    ports:
+      - "8082:8082"
+    
+  orders:
+    build: ./orders
+    networks:
+      - configuration-network
+      - auth-network
+      - service-registry-network
+    ports:
+      - "8083:8083"
+    
+  api-gateway:
+    build: ./api-gateway
+    networks:
+      - configuration-network
+      - auth-network
+      - service-registry-network
+    ports:
+      - "9000:9000"
+
+networks:
+  configuration-network:
+  auth-network:
+  service-registry-network:
+  neo4j-network:
+  mongodb-network:
+
+volumes:
+  mongodb-data:
+  neo4j-data:
